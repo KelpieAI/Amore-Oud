@@ -1,0 +1,133 @@
+:root {
+  --void: #080608;
+  --surface: #100e10;
+  --border: #211d1e;
+  --gold: #C9A84C;
+  --gold-dim: #8a6f2e;
+  --gold-wash: rgba(201, 168, 76, 0.07);
+  --rose: #c47b6e;
+  --rose-wash: rgba(196, 123, 110, 0.07);
+  --smoke: #a09a95;
+  --off: #ede8e0;
+  --muted: #5a5550;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--void);
+  color: var(--off);
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+a, button {
+  cursor: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Shared section styles */
+.section {
+  padding: 120px 48px;
+}
+
+.section-eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.section-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  color: var(--off);
+  letter-spacing: 0.02em;
+  margin-bottom: 64px;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* Shared CTA button (used in Hero + BrandStatement) */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  background: transparent;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.hero-cta:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--void);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 24px;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  #cursor,
+  #cursor-ring {
+    display: none;
+  }
+
+  a, button {
+    cursor: pointer;
+  }
+}

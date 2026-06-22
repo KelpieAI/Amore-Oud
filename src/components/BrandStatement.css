@@ -1,0 +1,107 @@
+.brand-statement {
+  padding: 120px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+
+.brand-img {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+
+.brand-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75) saturate(0.8);
+}
+
+.brand-img-accent {
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  height: 40%;
+  background: linear-gradient(to top, var(--void), transparent);
+}
+
+.brand-eyebrow {
+  margin-bottom: 24px;
+}
+
+.brand-eyebrow::after {
+  display: none;
+}
+
+.brand-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--off);
+  line-height: 1.35;
+  margin-bottom: 32px;
+}
+
+.brand-quote em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.brand-body {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--smoke);
+  margin-bottom: 40px;
+}
+
+.brand-cta {
+  margin-bottom: 0;
+}
+
+.brand-stats {
+  display: flex;
+  gap: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+.brand-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.brand-stat-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .brand-statement {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 80px 24px;
+  }
+
+  .brand-stats {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .brand-stat-num {
+    font-size: 36px;
+  }
+}

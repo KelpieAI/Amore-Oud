@@ -1,0 +1,102 @@
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 68px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8, 6, 8, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--off);
+}
+
+.nav-logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--off);
+  letter-spacing: 0.02em;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.nav-actions a {
+  text-decoration: none;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.nav-actions a:hover {
+  color: var(--off);
+}
+
+.nav-cart {
+  color: var(--gold) !important;
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0 20px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .nav-links a,
+  .nav-actions a,
+  .nav-cart {
+    font-size: 8px;
+    letter-spacing: 0.14em;
+  }
+
+  .nav-logo {
+    font-size: 22px;
+  }
+
+  .nav-actions {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links li:nth-child(3) {
+    display: none;
+  }
+
+  .nav-actions a:first-child {
+    display: none;
+  }
+}

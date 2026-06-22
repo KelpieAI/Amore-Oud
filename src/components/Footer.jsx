@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom'
 import './Footer.css'
 
 export default function Footer() {
   return (
-    <footer>
+    <footer id="contact">
       <div className="footer-top">
         <div>
           <div className="footer-logo">Amore Oud</div>
@@ -14,9 +15,9 @@ export default function Footer() {
         <div>
           <div className="footer-heading">Shop</div>
           <ul className="footer-links">
-            <li><a href="#">His</a></li>
-            <li><a href="#">Hers</a></li>
-            <li><a href="#">Unisex</a></li>
+          <li><Link to="/his">His</Link></li>
+          <li><Link to="/hers">Hers</Link></li>
+          <li><Link to="/unisex">Unisex</Link></li>
             <li><a href="#">New Arrivals</a></li>
             <li><a href="#">Sale</a></li>
           </ul>

@@ -1,0 +1,41 @@
+.product-card.out-of-stock .product-card-img img {
+  opacity: 0.45;
+}
+
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.product-badge.sale {
+  background: var(--off);
+  color: var(--void);
+}
+
+.product-badge.stock {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(8, 6, 8, 0.85);
+  color: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 8px 14px;
+}
+
+.product-card-img {
+  position: relative;
+}
+
+.product-card-btn:disabled {
+  opacity: 0.5;
+  cursor: none;
+}

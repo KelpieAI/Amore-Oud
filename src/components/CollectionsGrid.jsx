@@ -1,19 +1,12 @@
+import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
+import { categoryMeta } from '../data/products'
 import './CollectionsGrid.css'
 
 const collections = [
-  {
-    name: 'His',
-    img: 'https://images.unsplash.com/photo-1619994403073-2cec844b8e63?w=600&q=80',
-  },
-  {
-    name: 'Hers',
-    img: 'https://images.unsplash.com/photo-1592945403407-9caf930b0097?w=600&q=80',
-  },
-  {
-    name: 'Unisex',
-    img: 'https://images.unsplash.com/photo-1588776814546-1ffedba74520?w=600&q=80',
-  },
+  { key: 'his', name: 'His', path: '/his' },
+  { key: 'hers', name: 'Hers', path: '/hers' },
+  { key: 'unisex', name: 'Unisex', path: '/unisex' },
 ]
 
 export default function CollectionsGrid() {
@@ -25,14 +18,14 @@ export default function CollectionsGrid() {
       </Reveal>
       <div className="collections-grid">
         {collections.map((col) => (
-          <Reveal key={col.name} className="collection-card">
-            <img src={col.img} alt={col.name} />
+          <Reveal key={col.key} className="collection-card">
+            <img src={categoryMeta[col.key].image} alt={col.name} />
             <div className="collection-overlay">
               <div className="collection-tag">Collection</div>
               <div className="collection-name">{col.name}</div>
-              <a href="#" className="collection-cta">
+              <Link to={col.path} className="collection-cta">
                 Explore →
-              </a>
+              </Link>
             </div>
           </Reveal>
         ))}

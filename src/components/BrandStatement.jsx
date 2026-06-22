@@ -3,11 +3,11 @@ import './BrandStatement.css'
 
 export default function BrandStatement() {
   return (
-    <section className="brand-statement">
+    <section className="brand-statement" id="story">
       <Reveal className="brand-img">
         <img
-          src="https://images.unsplash.com/photo-1547004980-15af91e42f6d?w=700&q=80"
-          alt="Amore Oud"
+          src="/images/brand-oud.png"
+          alt="Agarwood chips — the raw oud used in Amore Oud fragrances"
         />
         <div className="brand-img-accent" />
       </Reveal>
@@ -16,11 +16,11 @@ export default function BrandStatement() {
         <p className="brand-quote">
           Beauty is more than
           <br />
-          appearance — it&apos;s a <em>feeling.</em>
+          appearance. It&apos;s a <em>feeling.</em>
         </p>
         <p className="brand-body">
           At Amore Oud, we are passionate about bringing the finest Arabic fragrances to the
-          world. Every bottle is a journey — from the ancient oud forests of the Middle East to
+          world. Every bottle is a journey, from the ancient oud forests of the Middle East to
           your skin. We believe your signature scent should be as unique as you are.
         </p>
         <a href="#" className="hero-cta brand-cta">

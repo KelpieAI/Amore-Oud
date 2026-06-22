@@ -1,61 +1,42 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
+import { getScrollProducts, getScatterProducts, formatPrice } from '../data/products'
 import './ScrollExperience.css'
 
-const products = [
-  {
-    name: 'OUD NOIR INTENSE',
-    sub: '100ML · HIS COLLECTION',
-    price: '£45',
-    img: 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80',
-    accent: '#C9A84C',
-    wash: 'rgba(201,168,76,0.07)',
-    ghost: 'ع',
-    ghostStroke: '1px rgba(201,168,76,0.06)',
-    stripLabel: 'Oud Noir',
-  },
-  {
-    name: 'ROSE DE LUNE',
-    sub: '85ML · HERS COLLECTION',
-    price: '£42',
-    img: 'https://images.unsplash.com/photo-1592945403407-9caf930b0097?w=400&q=80',
-    accent: '#c47b6e',
-    wash: 'rgba(196,123,110,0.08)',
-    ghost: 'ر',
-    ghostStroke: '1px rgba(196,123,110,0.07)',
-    stripLabel: 'Rose de Lune',
-  },
-  {
-    name: 'AMBER SAFFRON',
-    sub: '100ML · UNISEX COLLECTION',
-    price: '£48',
-    img: 'https://images.unsplash.com/photo-1601295452898-4bf7f6cc6d4e?w=400&q=80',
-    accent: '#d4943a',
-    wash: 'rgba(212,148,58,0.07)',
-    ghost: 'ز',
-    ghostStroke: '1px rgba(212,148,58,0.06)',
-    stripLabel: 'Amber Saffron',
-  },
-  {
-    name: 'OUD BLANC',
-    sub: '100ML · UNISEX COLLECTION',
-    price: '£38',
-    img: 'https://images.unsplash.com/photo-1588776814546-1ffedba74520?w=400&q=80',
-    accent: '#a8b8a0',
-    wash: 'rgba(168,184,160,0.06)',
-    ghost: 'و',
-    ghostStroke: '1px rgba(168,184,160,0.05)',
-    stripLabel: 'Oud Blanc',
-  },
+const scatterPositions = [
+  { left: '14%', top: '32%' },
+  { left: '50%', top: '30%' },
+  { left: '86%', top: '34%' },
+  { left: '16%', top: '72%' },
+  { left: '50%', top: '76%' },
+  { left: '84%', top: '72%' },
 ]
 
-const scatterItems = [
-  { name: 'Oud Noir', price: '£45', img: 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=120&q=80', left: '16%', top: '22%' },
-  { name: 'Rose de Lune', price: '£42', img: 'https://images.unsplash.com/photo-1592945403407-9caf930b0097?w=120&q=80', left: '50%', top: '15%' },
-  { name: 'Amber Saffron', price: '£48', img: 'https://images.unsplash.com/photo-1601295452898-4bf7f6cc6d4e?w=120&q=80', left: '82%', top: '26%' },
-  { name: 'Oud Blanc', price: '£38', img: 'https://images.unsplash.com/photo-1588776814546-1ffedba74520?w=120&q=80', left: '20%', top: '72%' },
-  { name: 'Musk Royale', price: '£40', img: 'https://images.unsplash.com/photo-1547004980-15af91e42f6d?w=120&q=80', left: '55%', top: '78%' },
-  { name: 'Velvet Oud', price: '£44', img: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=120&q=80', left: '80%', top: '68%' },
-]
+function toScrollProduct(p) {
+  return {
+    name: p.displayName,
+    sub: p.sub,
+    price: formatPrice(p.price),
+    img: p.image,
+    accent: p.accent,
+    wash: p.wash,
+    ghost: p.ghost,
+    ghostStroke: p.ghostStroke,
+    stripLabel: p.stripLabel,
+  }
+}
+
+const products = getScrollProducts().map(toScrollProduct)
+
+const scatterItems = getScatterProducts().map((p, i) => ({
+  name: p.stripLabel,
+  price: formatPrice(p.price),
+  img: p.image,
+  glow: p.scatterGlow || p.accent,
+  floatDelay: `${i * 0.55}s`,
+  floatDuration: `${3.6 + i * 0.35}s`,
+  ...scatterPositions[i],
+}))
 
 const CHARS = 'أبتثجحخدذرزسشصضطظعغفقكلمنهوي'
 
@@ -175,7 +156,7 @@ export default function ScrollExperience() {
       scatterEls.forEach((el) => {
         if (!el) return
         el.style.opacity = '0'
-        el.style.transform = 'translate(-50%,-50%) scale(0.3)'
+        el.style.transform = 'translate(-50%,-50%) scale(0.55)'
       })
     }
 
@@ -236,10 +217,11 @@ export default function ScrollExperience() {
 
         scatterEls.forEach((el, i) => {
           if (!el) return
-          const delay = i * 0.08
-          const local = clamp((sp - delay) / 0.5, 0, 1)
-          el.style.opacity = local
-          el.style.transform = `translate(-50%,-50%) scale(${0.3 + local * 0.7})`
+          const delay = i * 0.07
+          const local = clamp((sp - delay) / 0.65, 0, 1)
+          const eased = local * local * (3 - 2 * local)
+          el.style.opacity = eased
+          el.style.transform = `translate(-50%,-50%) scale(${0.55 + eased * 0.45})`
         })
       } else {
         const sp = (prog - scatterEnd) / (1 - scatterEnd)
@@ -304,7 +286,7 @@ export default function ScrollExperience() {
           <div id="product-stage">
             <div className="product-inner" id="product-inner" ref={stageRef}>
               <div className="product-img-wrap">
-                <img id="product-img" ref={pImgRef} src={products[0].img} alt="" />
+                <img id="product-img" ref={pImgRef} src={products[0]?.img} alt="" />
               </div>
               <div className="product-name" id="product-name" ref={pNameRef} />
               <div className="product-sub" id="product-sub" ref={pSubRef} />
@@ -332,15 +314,26 @@ export default function ScrollExperience() {
               <div
                 key={item.name}
                 className="scatter-item"
-                style={{ left: item.left, top: item.top }}
+                style={{
+                  left: item.left,
+                  top: item.top,
+                  '--scatter-glow': item.glow,
+                  '--float-delay': item.floatDelay,
+                  '--float-duration': item.floatDuration,
+                }}
                 data-i={i}
                 ref={(el) => {
                   scatterItemRefs.current[i] = el
                 }}
               >
-                <img src={item.img} alt={item.name} />
-                <span className="scatter-item-name">{item.name}</span>
-                <span className="scatter-item-price">{item.price}</span>
+                <div className="scatter-item-inner">
+                  <div className="scatter-item-glow" aria-hidden="true" />
+                  <div className="scatter-item-img-wrap">
+                    <img src={item.img} alt={item.name} />
+                  </div>
+                  <span className="scatter-item-name">{item.name}</span>
+                  <span className="scatter-item-price">{item.price}</span>
+                </div>
               </div>
             ))}
           </div>
@@ -352,12 +345,12 @@ export default function ScrollExperience() {
               the <em>collection.</em>
             </h2>
             <div className="cta-buttons">
-              <a href="#" className="btn-primary">
+              <Link to="/unisex" className="btn-primary">
                 Shop Now &nbsp;→
-              </a>
-              <a href="#" className="btn-secondary">
+              </Link>
+              <Link to="/his" className="btn-secondary">
                 View All Fragrances
-              </a>
+              </Link>
             </div>
             <p className="cta-tagline">Free UK Delivery · Premium Arabic Perfumes</p>
           </div>
